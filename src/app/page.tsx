@@ -1,3 +1,4 @@
+// app/page.tsx
 'use client';
 
 import { useEffect, useState } from "react";
@@ -8,7 +9,8 @@ export default function Home() {
   const [streams, setStreams] = useState<string[]>([]);
 
   useEffect(() => {
-    fetch("http://localhost:3001/api/streams")
+    const apiUrl = process.env.NEXT_PUBLIC_API_URL || "http://localhost:3001"; // Configura la URL de tu API aquí
+    fetch(`${apiUrl}/api/streams`)
       .then((res) => res.json())
       .then((data) => setStreams(data.streams))
       .catch((error) => console.error("Error al obtener streams:", error));
